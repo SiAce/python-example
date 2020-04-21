@@ -1,7 +1,10 @@
-import threading
+from multiprocessing import Process # Can also use pool
 import sqlite3
+import os
 
-conn = sqlite3.connect('threads_test.sqlite')
+print('Parent process %s.' % os.getpid())
+
+conn = sqlite3.connect('process_test.sqlite')
 c = conn.cursor()
 
 # Create table
@@ -14,7 +17,9 @@ ids = range(1000)
 fakeids = range(0, 10000, 10)
 
 def insert_data(i: int):
-    conn = sqlite3.connect('threads_test.sqlite')
+    print(f"Process {os.getpid()} started to insert data")
+
+    conn = sqlite3.connect('process_test.sqlite')
     c = conn.cursor()
     num_entries = 1000 // 6
     for j in range(num_entries * i, num_entries * (i + 1)):
@@ -23,10 +28,13 @@ def insert_data(i: int):
         conn.commit()
     conn.close()
 
-threads = []
+    print(f"Process {os.getpid()} finished")
+
+processes = []
 for i in range(6):
-    t = threading.Thread(target=insert_data, args=(i,))
-    threads.append(t)
+    p = Process(target=insert_data, args=(i,))
+    processes.append(p)
     
-for t in threads:
-    t.start()
+for p in processes:
+    p.start()
+
