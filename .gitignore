@@ -3,3 +3,7 @@
 
 # test files
 test.py
+*_test.py
+
+# vscode file
+.vscode/
