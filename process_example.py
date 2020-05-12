@@ -7,8 +7,11 @@ print('Parent process %s.' % os.getpid())
 conn = sqlite3.connect('process_test.sqlite')
 c = conn.cursor()
 
+# Drop table if exist
+c.execute("DROP TABLE IF EXISTS Foo")
+
 # Create table
-c.execute('''CREATE TABLE Foo
+c.execute('''CREATE TABLE IF NOT EXISTS Foo
              (id INTEGER PRIMARY KEY, fakeid INTEGER)''')
 
 conn.close()

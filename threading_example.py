@@ -4,8 +4,11 @@ import sqlite3
 conn = sqlite3.connect('threads_test.sqlite')
 c = conn.cursor()
 
+# Drop table if exist
+c.execute("DROP TABLE IF EXISTS Foo")
+
 # Create table
-c.execute('''CREATE TABLE Foo
+c.execute('''CREATE TABLE IF NOT EXISTS Foo
              (id INTEGER PRIMARY KEY, fakeid INTEGER)''')
 
 conn.close()
@@ -30,3 +33,6 @@ for i in range(6):
     
 for t in threads:
     t.start()
+
+for t in threads:
+    t.join()
