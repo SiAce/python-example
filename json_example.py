@@ -1,10 +1,12 @@
 import requests
 import json
 
-app_url = "https://steamspy.com/api.php?request=appdetails&appid=578080"
-response = requests.get(app_url)
-html_str = response.text
+def json_from_url(app_url):
 
-app_json = json.loads(html_str)
+    # app_url = "https://steamspy.com/api.php?request=appdetails&appid=578080"
+    response = requests.get(app_url)
+    html_str = response.text
 
-print(type(app_json))
+    app_json = json.loads(html_str)
+
+    return app_json

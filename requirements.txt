@@ -2,3 +2,4 @@ aiohttp
 lxml
 numpy
 requests
+pytest
