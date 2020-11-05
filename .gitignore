@@ -5,8 +5,9 @@
 test.py
 *_test.py
 
-# vscode file
+# vscode/pycharm file
 .vscode/
+.idea/
 
 # pycache
 /__pycache__/
