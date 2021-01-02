@@ -11,3 +11,6 @@ test.py
 
 # pycache
 /__pycache__/
+
+# python venv
+/venv/
